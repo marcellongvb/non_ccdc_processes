@@ -1,0 +1,16 @@
+% This code calculates the projection of a given process matrix W onto
+% the set of valid process matrices, preserving normalization, but not 
+% necessarily preserving positivity 
+
+% input d: vector of dimensions of the systems. d = [AI AO BI BO CI CO] 
+% For bipartite cases, use Ci = 1, Co = 1.
+
+function [Wv] = validprocessproj(W,d)
+
+Wv = traceandrep(W,2,d) - traceandrep(W,[1 2],d) + traceandrep(W,4,d) - traceandrep(W,[2 4],d) + traceandrep(W,[1 2 4],d) ...
+    - traceandrep(W,[3 4],d) + traceandrep(W,[2 3 4],d) - traceandrep(W,[1 2 3 4],d) + traceandrep(W,6,d) - traceandrep(W,[2 6],d) ...
+    + traceandrep(W,[1 2 6],d) - traceandrep(W,[4 6],d) + traceandrep(W,[2 4 6],d) - traceandrep(W,[1 2 4 6],d) ...
+    + traceandrep(W,[3 4 6],d) - traceandrep(W,[2 3 4 6],d) + traceandrep(W,[1 2 3 4 6],d) - traceandrep(W,[5 6],d) ...
+    + traceandrep(W,[2 5 6],d) - traceandrep(W,[1 2 5 6],d) + traceandrep(W,[4 5 6],d) ...
+    - traceandrep(W,[2 4 5 6],d) + traceandrep(W,[1 2 4 5 6],d) - traceandrep(W,[3 4 5 6],d) + traceandrep(W,[2 3 4 5 6],d); 
+  end
