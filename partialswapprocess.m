@@ -21,7 +21,7 @@ for i = 0:1
         end
     end
 end
-% Change 3 to 4 to test after finishing the code
+
 decoder_choi = PartialTrace(decoder_choi,4,[2 2 2 2]);
 % decoder_choi Hilbert spaces: Aux Ao/ Bi
 
