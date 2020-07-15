@@ -21,6 +21,7 @@ for i = 0:1
         end
     end
 end
+clear i
 
 decoder_choi = PartialTrace(decoder_choi,4,[2 2 2 2]);
 % decoder_choi Hilbert spaces: Aux Ao/ Bi
@@ -34,7 +35,7 @@ term_2 = kron(eye(2), decoder_choi); % Hilbert spaces: Ai Aux Ao Bi
 
 W = PartialTrace(term_1 * term_2, 2,[2 2 2 2]);
 
-[J,S,~] = ccdc_complete([2 2 2 1 1 1], 'GR', 'primal', W);
+[J,S ] = ccdc_complete([2 2 2 1 1 1], 'GR', 'primal', W);
 
 
 

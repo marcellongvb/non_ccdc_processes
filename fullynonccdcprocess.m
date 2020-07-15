@@ -18,6 +18,7 @@ for i=0:1
         end
     end
 end
+clear i
 
 % Decoder Hilbert spaces: Aux Ao/Bi Aux_o
 % Removing Aux_o
@@ -51,4 +52,4 @@ term_2 = kron(eye(2), Decoder);
 
 W = PartialTrace(term_1 * term_2, 2, [2 2 2 2]);
 
-[J, S, ~] = ccdc_complete([2 2 2 1 1 1], 'GR', 'primal', W)
+[J, S] = ccdc_complete([2 2 2 1 1 1], 'GR', 'primal', W)
