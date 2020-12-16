@@ -17,7 +17,7 @@ end
 
 [~,neworder] = sort([part idxrest]);
 
-partW = kron2(eye(dpart)/(dpart),PartialTrace(W,part,d));
+partW = Tensor(eye(dpart)/(dpart),PartialTrace(W,part,d));
 partW = PermuteSystems(partW,neworder,[d(part) d(idxrest)]);
 
 end
