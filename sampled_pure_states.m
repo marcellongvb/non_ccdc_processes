@@ -5,3 +5,5 @@ for i=1:N
 psi = RandomStateVector(d);
 states(:,:,i) = psi*psi';
 end
+
+end
