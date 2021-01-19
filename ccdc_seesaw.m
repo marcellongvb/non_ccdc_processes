@@ -22,11 +22,7 @@ if nargin < 5
     W = random_bipartite_ordered_process(dims, random_state_channel);
 end
 
-states = zeros(dAI, dAI, 200);
-for i = 1:1000
-    psi = RandomStateVector(dAI);
-    states(:,:,i) = psi * psi';
-end
+states = sampled_pure_states(dAI, 1000);
 
 R = [];
 R(1) = 0;
@@ -38,13 +34,13 @@ while abs(R(i) - R(i-1)) > 0.0001
     i = i+1;  
     switch approximation
         case 'inner'
-       [Rmax, Smax] = ccdc_robustness_inner(Wmax, dims, 'primal', robustness, states);
+       [Rmax, Smax] = ccdc_robustness_inner(Wmax, [dAI dAO dBI], 'primal', robustness, states);
         case 'outer'
-       [Rmax, Smax] = ccdc_robustness_outer(Wmax, dims, 'primal', robustness, 1);
+       [Rmax, Smax] = ccdc_robustness_outer(Wmax, [dAI dAO dBI], 'primal', robustness, 1);
     end
     R(i) = Rmax;
     Smax = (Smax + Smax')/2;
-    [Wmax] = process_max_wit_viol(Smax, dims);
+    [Wmax] = process_max_wit_viol(Smax, [dAI dAO dBI]);
 end
 disp('number of iterations:')
 i-2
