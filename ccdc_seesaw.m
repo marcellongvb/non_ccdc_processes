@@ -18,11 +18,25 @@ dAI = dims(1);
 dAO = dims(2);
 dBI = dims(3);
 
+if isequal(approximation, 'inner')
+    if dBI > 4
+        states = sampled_pure_states(dAI, 200);
+    else
+        states = sampled_pure_states(dAI, 1000);
+    end    
+elseif isequal(approximation, 'outer')    
+    if dBI > 4
+        k = 1;
+    else
+        k = 2;
+    end    
+end
+
+
 if nargin < 5
     W = random_bipartite_ordered_process(dims, random_state_channel);
 end
 
-states = sampled_pure_states(dAI, 1000);
 
 R = [];
 R(1) = 0;
@@ -36,7 +50,7 @@ while abs(R(i) - R(i-1)) > 0.0001
         case 'inner'
        [Rmax, Smax] = ccdc_robustness_inner(Wmax, [dAI dAO dBI], 'primal', robustness, states);
         case 'outer'
-       [Rmax, Smax] = ccdc_robustness_outer(Wmax, [dAI dAO dBI], 'primal', robustness, 1);
+       [Rmax, Smax] = ccdc_robustness_outer(Wmax, [dAI dAO dBI], 'primal', robustness, k);
     end
     R(i) = Rmax;
     Smax = (Smax + Smax')/2;
