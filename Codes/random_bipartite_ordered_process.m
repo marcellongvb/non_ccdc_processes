@@ -33,7 +33,7 @@ switch random_state_channel
         W = RandomDensityMatrix(dAI*dAO*dBI);
         W = W + traceandrep(W, [2 3], [dAI dAO dBI]) - traceandrep(W, 3, [dAI dAO dBI]);        
         while min(eig(W)) < 0 && i <= 100
-            i = i + 1;
+            i = i + 1
     %         Generating random density matrix with dimensions
     %         (dAI*dAO*dBI,dAI*dAO*dBI)
             W = RandomDensityMatrix(dAI*dAO*dBI);
@@ -43,8 +43,9 @@ switch random_state_channel
             W = dAO * W;               
         end
          %         Ensuring positive semidefiniteness
-        if i ==100 
-            W = dAO * ((W - min(eig(W)) * eye(dAI*dAO*dBI))/trace((W - min(eig(W)) * eye(dAI*dAO*dBI))));
+        if i ==101 
+            lambda = min(eig(W));
+            W = dAO * (W - lambda * eye(dAI*dAO*dBI))/trace(W - lambda * eye(dAI*dAO*dBI));
         end        
 end
 % Ensuring that W is hermitian (removing numerical residuals)
