@@ -1,8 +1,8 @@
-## Code to acompany: [Simple and maximally robust processes with no classical common-cause or direct-cause explanation](https://arxiv.org/xxx)
+## Code to acompany: [Simple and maximally robust processes with no classical common-cause or direct-cause explanation](https://arxiv.org/abs/2101.11630)
 
 #### Marcello Nery, Marco Túlio Quintino, Philippe Allard Guérin, Thiago O. Maciel, Reinaldo O. Vianna
 
-This repository contains all the codes used to calculate the numerical results presented in the article "*Simple and maximally robust processes with no classical common-cause or direct-cause explanation*", Marcello Nery, Marco Túlio Quintino, Philippe Allard Guérin, Thiago O. Maciel, Reinaldo O. Vianna, [arXiv:XXX](https://arxiv.org/xxx)".
+This repository contains all the codes used to calculate the numerical results presented in the article "*Simple and maximally robust processes with no classical common-cause or direct-cause explanation*", Marcello Nery, Marco Túlio Quintino, Philippe Allard Guérin, Thiago O. Maciel, Reinaldo O. Vianna, [	arXiv:2101.11630](https://arxiv.org/abs/2101.11630)".
 
 ### MATLAB codes requires:
 - [Yalmip](https://yalmip.github.io/) - A free toolbox for modeling and optimization in MATLAB
