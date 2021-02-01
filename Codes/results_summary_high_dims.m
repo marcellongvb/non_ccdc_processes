@@ -1,8 +1,8 @@
 % This script generates every robustness for the processes with great 
 % dimensions presented in our paper. W_FB, W339
 
-states = zeros(2,2,200);
-for i = 1:200
+states = zeros(2,2,150);
+for i = 1:150
     psi = RandomStateVector(2);
     states(:,:,i) = psi*psi';
 end

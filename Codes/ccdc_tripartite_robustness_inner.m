@@ -18,7 +18,7 @@ function [R, S] = ccdc_tripartite_robustness_inner(W, dims, robustness, states)
     dCI = dims(5);
 
 if nargin < 4
-    N = 200;
+    N = 150;
     states=zeros(dAI,dAI,N);
     for i = 1:N
        psi = RandomStateVector(dAI);
@@ -28,7 +28,7 @@ else
     if size(states,3) == 1
         N = states;
         states = zeros(dAI, dAI, N);
-            for i=1:200
+            for i=1:150
                 psi = RandomStateVector(dAI);
                 states(:,:,i) = psi * psi';
             end
