@@ -1,6 +1,6 @@
 clear
 % This script generates the numerical robustness presented in the paper
-% The adjustable parameters may be used the improve our inner and outer aproximations
+% The adjustable parameters may be used the improve our inner and outer approximations 
 % In order to obtain the values for a particular process, uncomment the corresponding line
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -20,7 +20,7 @@ non_ccdc_processes_generator; % This command generates all process mentioned in 
 %Uncomment the line corresponding to the desired process
 
  ccdc_robustness_summary(W222, [2 2 2], states, k);   
-% ccdc_robustness_summary(W224, [2 2 4], states, k); 
+% ccdc_robustness_summary(W224, [2 2 4], states, k); % Since Bob's input dimension is 4, this code may take a bit longer to run
 % ccdc_robustness_summary(W_MRSR, [2 2 2],states, k);  
 % ccdc_robustness_summary(W_PPT, [2 2 2], states, k);   
 % ccdc_robustness_summary(W_SEP, [2 2 2], states, k)
