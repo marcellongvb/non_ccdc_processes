@@ -1,9 +1,0 @@
-- Bloch2Rho.m
-- ccdc_robustness_inner.m (atualização)
-- ccdc_robustness_outerNEW.m
-- RemoveEquivalentVectors.m
-- Rho2Bloch.m
-- runCCDC
-- sphere_approximation
-- uniform_qubit_states.m
-- vert2lcon.m
