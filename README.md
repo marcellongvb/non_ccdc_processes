@@ -21,10 +21,10 @@ For a fast reproduction of the results, follow the following steps:
 
 This command will calculate every robustness for every process (with low dimensions) presented in the work. For calculating the robustnesses of processes with high dimensions (![equation](http://latex.codecogs.com/gif.latex?W_{\textrm{FB}}), ![equation](http://latex.codecogs.com/gif.latex?W_{339})), execute ```results_summary_high_dims``` in the MATLAB terminal. This script demands a high amount of memory from the computer, so use this comand carefully.
 
-#### Codes
+#### Code
 
 - [results_summary.m](https://github.com/marcellongvb/non_ccdc_processes/blob/master/code/results_summary.m):
-Script that calculates every robustness of every process with small dimensions presented in our work (![equation](http://latex.codecogs.com/gif.latex?W_{222}), ![equation](http://latex.codecogs.com/gif.latex?W_{224}), ![equation](http://latex.codecogs.com/gif.latex?W_{\textrm{PPT}}), ![equation](http://latex.codecogs.com/gif.latex?W_{\textrm{SEP}}), ![equation](http://latex.codecogs.com/gif.latex?W_{\textrm{MRSR}})).
+Script that calculates every robustness of every process with small dimensions presented in our work (![equation](http://latex.codecogs.com/gif.latex?W_{222}), ![equation](http://latex.codecogs.com/gif.latex?W_{224}), ![equation](http://latex.codecogs.com/gif.latex?W_{\textrm{PPT}}), ![equation](http://latex.codecogs.com/gif.latex?W_{\textrm{SEP}}), ![equation](http://latex.codecogs.com/gif.latex?W_{\textrm{MRSR}}) ![equation](http://latex.codecogs.com/gif.latex?W_{\textrm{FB}}), ![equation](http://latex.codecogs.com/gif.latex?W_{339}))
 
 
 - [bipartite_ordered_test.m](https://github.com/marcellongvb/non_ccdc_processes/blob/master/code/bipartite_ordered_test.m): 
