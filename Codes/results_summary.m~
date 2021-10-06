@@ -1,0 +1,33 @@
+clear
+% This script generates every robustness for almost every process presented
+% in our paper. W222, W224, W_MRSR, W_PPT, W_SEP 
+
+non_ccdc_processes_generator; % This command generates every process mentioned in the paper.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%  Adjustable parameters  %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+n = 10; %This corresponds to the n of the family of uniform qubit states with N=2n^2 states
+states = uniform_qubit_states(n); % Pick N=2*n^2 rather uniform qubit states as in Ref. 
+% states=rNRandomPureStates(2,2*n^2); %Pick N=2*n^2 uniformly random qubit states as in 
+N=size(states,3);
+k = 1;  %Setting k=1 is equivalent of PPT, k>=2 also imposes k-sym Bose extention
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%  Adjustable parameters  %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+% ccdc_robustness_summary(W222, [2 2 2], states, k);   
+% ccdc_robustness_summary(W224, [2 2 4], states, k); 
+% ccdc_robustness_summary(W_MRSR, [2 2 2],states, k);  
+% ccdc_robustness_summary(W_PPT, [2 2 2], states, k);   
+% ccdc_robustness_summary(W_SEP, [2 2 2], states, k)
+ccdc_tripartite_robustness_inner(W_FB, [2 2 2 2 8], 'GR', states)
+% ccdc_tripartite_robustness_inner(W_FB, [2 2 2 2 8], 'WNR', states)
+% ccdc_tripartite_robustness_outer(W_FB, [2 2 2 2 8], 'GR', k)
+
+% ccdc_tripartite_robustness_outer(W_FB, [2 2 2 2 8], 'WNR', k)
+
+% ccdc_robustness_summary(W_FB, [2 2 2 2 8], states, k); 
