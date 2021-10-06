@@ -39,7 +39,7 @@ if size(dims,2)==3
     fprintf('White noise robustness: \n');
     fprintf('Upper-bound : %.4f  \n', WNR_primal_up);
     fprintf('Lower-bound (CCDC) : %.4f \n', WNR_primal_low_ccdc);
-    fprintf('Lower-bound (Separability)- : %.4f \n', WNR_primal_low_sep);
+    fprintf('Lower-bound (Separability): %.4f \n', WNR_primal_low_sep);
 elseif size(dims,2)==5
 
     fprintf('Summary of robustnesses: \n');
