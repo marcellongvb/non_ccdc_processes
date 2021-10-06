@@ -1,5 +1,6 @@
-function [Rob, S] = ccdc_robustness_inner(W, dims, sdp_prob, robustness, states)
-% CCDC ROBUSTNESS MEASURED USING INNER APPROXIMATION OF CCDC SET
+function [Rob, S] = ccdc_robustness_outerNEW(W, dims, sdp_prob, robustness, quasi_states, k)
+% CCDC ROBUSTNESS MEASURED USING OUTER APPROXIMATION OF CCDC SET
+% CONSIDERING TIGHT DIRECT-CAUSE OUTER APPROXIMATION
 % This function is used for calculating the CCDC robustness of a given
 % process W with dimensions (dAI, dAO, dBI).
 % The interpreter used here is CVX.
@@ -9,8 +10,11 @@ function [Rob, S] = ccdc_robustness_inner(W, dims, sdp_prob, robustness, states)
 % sdp_prob -- Optimization problem ('primal', 'dual')
 % robustness -- options: 'GR', 'WNR'. 'GR' for generalised robustness,
 % 'WNR' for white noise robustness.
-% intepreter -- ('cvx', 'yalmip')
-% k -- level of symmetric extensions
+% quasi_states -- Set of trace-one operators with dimension dAI from which
+% the convex hull gives an outer approximation for the set of quantum
+% states with dimension dAI
+% k -- level of symmetric extensions (redundant constraints of
+% entanglement)
 % Outputs:
 % R -- Robustness of the process W
 % S -- Optimal witness for W
@@ -24,25 +28,9 @@ dAI = dims(1);
 dAO = dims(2);
 dBI = dims(3);
 
-if nargin < 5
-    N = 1000;
-    states = zeros(dAI,dAI,1000);
-    for i = 1:1000
-       psi = RandomStateVector(dAI);
-       states(:,:,i) = psi*psi';
-    end
-    else
-    if size(states,1) == 1
-        N = states;
-        states = zeros(dAI,dAI,N);
-        for i=1:N
-            psi = RandomStateVector(dAI);
-            states(:,:,i) = psi * psi';
-        end 
-    else
-        N = size(states,3);
-    end
-end
+
+N = size(quasi_states,3);
+
 
 switch sdp_prob
     case 'primal'        
@@ -55,15 +43,19 @@ switch sdp_prob
            variable Di(dAO*dBI, dAO*dBI, N) complex semidefinite
            variable rho(dAI*dBI, dAI*dBI) complex semidefinite
            dual variable S
+          
            
            Wdc = 0;
            for i = 1:N
-               Wdc = Wdc + Tensor(states(:,:,i),Di(:,:,i));
+               Wdc = Wdc + Tensor(quasi_states(:,:,i),Di(:,:,i));
            end
+            
 
            minimize trace(Omega)/dAO
            
            subject to 
+           SymmetricExtension(Wdc,k,[dAI dAO*dBI],1,1);
+           
     %         Tripartite ordered condition for Omega:          
            PartialTrace(Omega,3,dims)==Tensor(PartialTrace(Omega,[2 3],dims),eye(dAO)/dAO);
     %         Constraint for direct-cause term:
@@ -86,7 +78,7 @@ switch sdp_prob
            
            Wdc = 0;
            for i = 1:N
-               Wdc = Wdc + Tensor(states(:,:,i),Di(:,:,i));
+               Wdc = Wdc + Tensor(quasi_states(:,:,i),Di(:,:,i));
            end
 
            minimize Rob
@@ -112,7 +104,7 @@ switch sdp_prob
 %             Common-cause constraint:
             F = [PartialTrace(S,2,dims)>=0];
             for i=1:N
-               F = [F,PartialTrace((S*Tensor(states(:,:,i),eye(dAI*dBI))+traceandrep(S_i(:,:,i),3,dims)-traceandrep(S_i(:,:,i),[2 3],dims)),1,dims)>=0];
+               F = [F,PartialTrace((S*Tensor(quasi_states(:,:,i),eye(dAI*dBI))+traceandrep(S_i(:,:,i),3,dims)-traceandrep(S_i(:,:,i),[2 3],dims)),1,dims)>=0];
             end
             %             Generalized noise constraint
             F = [F,eye(dAI*dAO*dBI)*(1+trace(S*W))-dAO*S>=0];
@@ -129,7 +121,7 @@ switch sdp_prob
 %             Common-cause constraint:
             F = [PartialTrace(S,2,dims)>=0];
             for i=1:N
-               F = [F,PartialTrace((S*Tensor(states(:,:,i),eye(dAI*dBI))+traceandrep(S_i(:,:,i),3,dims)-traceandrep(S_i(:,:,i),[2 3],dims)),1,dims)>=0];
+               F = [F,PartialTrace((S*Tensor(quasi_states(:,:,i),eye(dAI*dBI))+traceandrep(S_i(:,:,i),3,dims)-traceandrep(S_i(:,:,i),[2 3],dims)),1,dims)>=0];
             end
             %             White noise constraint
             F = [F,trace(S)-(dAI*dBI)*trace(S*W)<=(dAI*dBI)];

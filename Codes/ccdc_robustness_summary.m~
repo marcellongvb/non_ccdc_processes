@@ -8,12 +8,10 @@ function [robustnesses, order] = ccdc_robustness_summary(W, dims, states, k)
 %    states - set of random pure states on AI
 %    k - level of symmetric extensions
 
-dAI = dims(1);
-
-[quasi_states, ~, etaShrinkNUM ] = uniform_qubit_states(11);
-N = size(quasi_states,3);
+[quasi_states, ~, etaShrinkNUM ] = uniform_qubit_states(22);
+N = size(quasi_states,3)
 for i=1:N
-    quasi_states(:,:,i)= (1/etaShrinkNUM) * quasi_states(:,:,i) + (1-1/etaShrinkNUM) * eye(dAI)/dAI;
+    quasi_states(:,:,i)=1/etaShrinkNUM * quasi_states(:,:,i) + (1-1/etaShrinkNUM) * eye(d)/d;
 end
 
 
@@ -65,9 +63,10 @@ else
 end
 
 if size(dims,2)==3
-    order = ['GR_primal_up, ', 'GR_dual_up, ', 'GR_primal_low_sep, ', 'GR_dual_low_sep, ', 'WNR_primal_up, ', 'WNR_dual_up, ', 'WNR_primal_low_sep, ', 'WNR_dual_low_sep, ', 'GR_primal_low_CCDC, ', 'WNR_primal_low_CCDC, ',  'GR_dual_low_CCDC, ', 'WNR_dual_low_CCDC.'];
+    order = ['GR_primal_up, ', 'GR_dual_up, ', 'GR_primal_low_sep, ', ...
+        'GR_dual_low_sep, ', 'WNR_primal_up, ', 'WNR_dual_up, ', 'WNR_primal_low_sep, ', 'WNR_dual_low_sep, '...
+        ];
     robustnesses = [GR_primal_up, GR_dual_up, GR_primal_low_sep, GR_dual_low_sep, WNR_primal_up, WNR_dual_up, WNR_primal_low_sep, WNR_dual_low_sep];
-    robustnesses = [robustnesses, GR_primal_low_ccdc, WNR_primal_low_ccdc, GR_dual_low_ccdc, WNR_dual_low_ccdc];
 
     fprintf('Summary of robustnesses: \n');
     fprintf('Generalized robustness: \n');
